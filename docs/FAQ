@@ -1,0 +1,57 @@
+Frequenty Asked Questions
+
+1) What is the purpose of the Biological Registry module ?
+
+	The Biological Registry module for Xoops (hereafter referred to as bioreg) is intended to track populations of biological organisms within captivity. It was written expressly for the American Killifish Association (www.aka.org) to help determine which populations are rare and need extra attention toward preservation. It also allows people seeking a particular fish to search the national database with the intent to purchasing or trading.
+
+2) Is it only useful for tracking killifish populations ?
+
+	There are some killifish specific terms and features, but it should be easy to adapt this to other fish, and only slightly harder for birds, reptiles, and even plants. There is also a built in database of all known killifish populations, hopefully with correct nomenclature. With many people using the database, it should improve in scope and accuracy with time. If this database is kept up to date, it will be of great value for any number of purposes.
+
+3) Why did you write it so that it can only run in Xoops ?
+
+	Because I'm lazy and Xoops does most of the "heavy lifting" for the program. The actual code is quite small, a major benefit for others who seek to modify or enhance it. Being a web app is pretty much a requirement in today's world. Because it uses XOOPS, it is easily extensible and can be easily translated into other languages (i.e. German).
+
+4) When I try to access the "Manage listings" page, why do I get a permissions error ?
+
+	You are not logged into the system, so Xoops doesn't know who you are, or what listings you might be allowed to manage. The solution is to login (if you're not an AKA member, you may need to register first).
+
+5) What do the various search options mean ?
+
+	The check boxes allow you to filter out certain records that are not of the type you are looking for. By default, only fish and eggs are checked, because is you are looking to obtain a particular fish, you are not as interested in the listings from people who also want the same fish, or those who do not have them available for sale. If no available listings are shown, perhaps you want to include the people who have registered the fish, but don't currently have it available, so you would check that box and search again.
+
+	The search boxes to the right are similar to internet searches. You can put text into one or more of the boxes and the search will exclude records that don't match all the criteria. If you put too much into these boxes you will get nothing returned, just like an internet search that is too specific. Partial matches work fine here and the search is case insensitive, for example, putting "semion" into the name field will pick up all "Aphyosemions" (and some others), as would "Aphy", "aPH", etc.
+
+6) Why do only only some listings have links on their names ?
+
+	Only populations with a URL defined by the admins will have a link. This is typically to a picture or informative web page.
+
+7) I don't want people hassling me to sell them fish that I don't have available. Can I hide my listings ?
+
+	Yes, we don't want anyone to not register their fish for this reason, so there are visibility codes associated with each listing. This means you can control who has the right to view that listing (the searches respect this also). The codes mean the following:
+
+	All - Everyone can view this listing
+	AKA - Only viewable by valid AKA members (registering on the site does not count, you must have paid the dues)
+	F&EL - AKA members cannot view this online, but it will be in the paper F&EL listing
+	SMC - Never listed for sale. This info will be available to the Species Maintenance Committee to help determine which poulations are in danger of extinction from the hobby.
+
+	These categories are "cumulative", meaning that the F&EL listing include all listings in the All and AKA categories, and the SMC can see everything. The F&EL will (eventually) be derived from this database, and will include all listings in he first 3 levels (not SMC) with an available status.
+
+8) What if I don't have a particular species available right now, but want to keep the listing for when I get more to sell ?
+
+	There are 2 options for putting a listing on hold:
+
+	#1 - Change the status to Maintain. You listing (including price and comments) will still show up, but the status will not show as available. This will also drop you from the printed F&EL.
+
+	#2 - Change the type from Fish, Eggs, or Both to Register. This will keep your listing from showing up in the normal searches for available fish. You should also set the ststus to Maintain in this case to make it clear that they are not available.
+
+	Now, when you have the next generation grown up enough to sell, you just change back you listing. A few clicks and it's active again. Ideally, you adjust your listings frequently in this way to accurately reflect what you have available.
+
+9) I already have my own website that's a lot of trouble to keep up to date. Now you want me to keep this up too. Can I just put a link to my site and be done with it ?
+
+	We don't have a mechanisn for doing that. You can put a URL in your user information that people can find if they look, but you fish will not be part of the registry. There is a solution however, you can keep the information up to date on the AKA site and then link back to your AKA listings from your site. You can use a so called deep link to put the customer right on your listings. Here is an example of what the deep link would look like:
+
+	http://www.aka.org/modules/bioreg/?all_types=y&seller_sel=dheltzel&filter_seller=dheltzel
+
+	Remember that only listing with a visibility of "All" will show with that link, since the viewer didn't login.
+

@@ -1,0 +1,50 @@
+<center>
+  <h2>
+    <a href="<{$REQUEST_URI}>">Request New Item</a>
+  </h2>
+</center>
+
+<form method="post" action="<{$REQUEST_URI}>" >
+  Please supply the following information:<p>
+  <table>
+    <tr>
+      <td width="30%" align="right">
+        Genus
+      </td>
+      <td width="70%">
+        <input type="text" name="genus_name">
+      </td>
+    </tr>
+    <tr>
+      <td align="right">
+        Species
+      </td>
+      <td>
+        <input type="text" name="species_name">
+      </td>
+    </tr>
+    <tr>
+      <td align="right">
+        Locality name
+      </td>
+      <td>
+        <input type="text" name="pop_name">
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        Please supply a reference to allow validation of this information<br> (e.g. Langton's Wild Collections book or other resource)
+      </td>
+      <td>
+        <textarea name="narrative" rows="10" cols="30">  </textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <input type="submit" name="submit" value="send request">
+      </td>
+    </tr>
+  </table>
+</form>

@@ -1,0 +1,253 @@
+<small>
+  <a href="index.php"><{$smarty.const._MI_BIOREG_LISTING}></a> |
+  <a href="bioreg-manage_listings.php"><{$smarty.const._MI_BIOREG_MANAGE_LISTING}></a> |
+  <a href="bioreg-newitem.php"><{$smarty.const._MI_BIOREG_NEWITEM}></a>
+</small>
+
+<{* Display the appropriate heading *}>
+<center>
+  <h2>
+    <a href="<{$REQUEST_URI}>">
+    <{if $genus|count_characters eq 0}>
+      <{$smarty.const._MI_BIOREG_INFO}>
+    <{else}>
+      Info about <i><{$genus}></i>
+      <{if $pop_selected eq 'y'}>
+        <i><{$species}></i> <b><{$pop}></b>
+      <{else}>
+        <i><{$species}></i>
+      <{/if}>
+    <{/if}>
+    </a>
+  </h2>
+</center>
+
+<form method="post" action="<{$REQUEST_URI}>">
+  <table>
+    <{if $genus|count_characters gt 0}>
+      <input type="hidden" name="genus_name" value="<{$genus}>">
+    <{/if}>
+    <{if $species|count_characters gt 0}>
+      <input type="hidden" name="species_name" value="<{$species}>">
+    <{/if}>
+    <tr>
+      <td width="20%" align="right">
+        Select Genus<br><i>(or item type)</i>
+      </td>
+      <td width="20%">
+        <select name="genus_name">
+          <{section name=genusname loop=$bio_genus}>
+            <option value="<{$bio_genus[genusname].genus_name}>"<{if $bio_genus[genusname].genus_name eq $genus}> selected<{/if}>>
+              <{$bio_genus[genusname].genus_name|escape}>
+            </option>
+          <{/section}>
+        </select>
+      </td>
+      <td width="60%">
+        <input type="submit" name="sel_genus" value="select genus">
+      </td>
+    </tr>
+    <{if $genus|count_characters eq 0}>
+      <{if $can_add_genus eq 'y'}>
+        <tr>
+          <td align="right">
+            New Genus<br><i>(or item type)</i>
+          </td>
+          <td>
+            <input type="text" name="new_genus">
+          </td>
+          <td>
+            <input type="submit" name="add_genus" value="add genus">
+          </td>
+        </tr>
+      <{/if}>
+    <{else}>
+      <tr>
+        <td width="20%" align="right">
+          Genus name
+        </td>
+        <td width="20%">
+          <{if $can_add_genus eq 'y'}>
+            <input type="text" name="new_genus_name" value="<{$new_genus_name}>">
+          <{else}>
+            <{$new_genus_name}>
+          <{/if}>
+        </td>
+        <td width="60%">
+        </td>
+      </tr>
+      <tr>
+        <td align="right">
+          Family name
+        </td>
+        <td>
+          <{if $can_add_genus eq 'y'}>
+            <input type="text" name="new_family_name" value="<{$new_family_name}>">
+          <{else}>
+            <{$new_family_name}>
+          <{/if}>
+        </td>
+        <td>
+          <{if $can_add_genus eq 'y'}>
+            <input type="submit" name="edit_bio_genus" value="update genus info">
+          <{/if}>
+        </td>
+      </tr>
+    <{/if}>
+
+    <{if $genus|count_characters gt 0}>
+      <tr>
+        <td width="20%" align="right">
+          Select Species<br><i>(or item)</i>
+        </td>
+        <td width="20%">
+          <select name="species_name">
+            <{section name=speciesname loop=$bio_species_by_genus}>
+              <option value="<{$bio_species_by_genus[speciesname].species_name}>"<{if $bio_species_by_genus[speciesname].species_name eq $species}> selected<{/if}>>
+                <{$bio_species_by_genus[speciesname].species_name|escape}>
+              </option>
+            <{/section}>
+          </select>
+        </td>
+        <td width="60%">
+          <input type="submit" name="sel_species" value="select species">
+        </td>
+      </tr>
+      <{if $can_add_species eq 'y'}>
+        <{if $genus|count_characters gt 0 and $species|count_characters gt 0}>
+          <tr>
+            <td align="right">
+              Species<br><i>(or item)</i>
+            </td>
+            <td>
+              <input type="text" name="new_species_name"  value="<{$new_species_name}>">
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              Group
+            </td>
+            <td>
+              <input type="text" name="new_group_name"  value="<{$new_group_name}>">
+            </td>
+            <td>
+              <input type="submit" name="edit_bio_species" value="update species info">
+            </td>
+          </tr>
+        <{/if}>
+        <tr>
+          <td align="right">
+            New Species<br><i>(or item)</i>
+          </td>
+          <td>
+            <input type="text" name="new_species">
+          </td>
+          <td>
+            <input type="submit" name="add_species" value="add species">
+          </td>
+        </tr>
+      <{/if}>
+    <{/if}>
+  </table>
+
+  <{if $genus|count_characters gt 0 and $species|count_characters gt 0 and $pop_selected ne 'y'}>
+    <br><br>
+    <table>
+      <tr>
+        <th width="25%">
+          Name
+        </th>
+        <th width="25%">
+          Common Name
+        </th>
+        <{if $can_add_species eq 'y'}>
+          <th width="25%">
+            URL
+          </th>
+          <th width="8%">
+            Status
+          </th>
+        <{/if}>
+        <th width="8%">
+          Listings
+        </th>
+      </tr>
+      <{cycle values="odd,even" print=false}>
+      <{section name=popname loop=$bio_pop_by_genus}>
+        <input type="hidden" name="populations_array[<{$bio_pop_by_genus[popname].pop_key}>]">
+        <{if $bio_pop_by_genus[popname].species_name eq $species}>
+          <tr>
+            <td class="<{cycle advance=false}>">
+              <{if $bio_pop_by_genus[popname].pop_name|count_characters eq 0}>
+                (none specified)
+              <{elseif $can_add_species eq 'y'}>
+                <input type="text" size=25 name="pop_name_arr[<{$bio_pop_by_genus[popname].pop_key}>]" value="<{$bio_pop_by_genus[popname].pop_name}>"><br>
+              <{else}>
+                <{if $bio_pop_by_genus[popname].pop_url|count_characters eq 0}>
+                  <{$bio_pop_by_genus[popname].pop_name|escape}>
+                <{else}>
+                  <a href="$bio_pop_by_genus[popname].pop_url|escape"><{$bio_pop_by_genus[popname].pop_name|escape}></a>
+                <{/if}>
+              <{/if}>
+            </td>
+            <td class="<{cycle advance=false}>">
+              <{if $can_add_species eq 'y'}>
+                <input type="text" size=25 name="common_name[<{$bio_pop_by_genus[popname].pop_key}>]" value="<{$bio_pop_by_genus[popname].common_name}>"><br>
+              <{else}>
+                <{$bio_pop_by_genus[popname].common_name|escape}>
+              <{/if}>
+            </td>
+            <{if $can_add_species eq 'y'}>
+              <td class="<{cycle advance=false}>">
+                <input type="text" size=25 name="pop_url[<{$bio_pop_by_genus[popname].pop_key}>]" value="<{$bio_pop_by_genus[popname].pop_url}>"><br>
+              </td>
+              <td class="<{cycle advance=false}>">
+                <{if $bio_pop_by_genus[popname].pop_name|count_characters gt 0}>
+                  <select name="status[<{$bio_pop_by_genus[popname].pop_key}>]">
+                    <{html_options output=$statusdesc values=$statusid selected=$bio_pop_by_genus[popname].status}>
+                  </select>
+                <{else}>
+                    Available
+                <{/if}>
+              </td>
+            <{/if}>
+            <td class="<{cycle advance=true}>">
+              <{if $bio_pop_by_genus[popname].lcount gt 0}>
+                <a href="index.php?popkey=<{$bio_pop_by_genus[popname].pop_key}>&all_types=y">
+                Listings
+                </a>
+              <{else}>
+                None
+              <{/if}>
+            </td>
+          </tr>
+        <{/if}>
+      <{/section}>
+      <{if $can_add_species eq 'y'}>
+        <tr>
+          <td>
+            <input type="submit" name="upd_pop" value="update population info">
+          </td>
+        </tr>
+      <{/if}>
+    </table>
+    <{if $can_add_populations eq 'y'}>
+      <br><br>
+      <table>
+        <tr>
+          <td width="20%" align="right">
+            New Population
+          </td>
+          <td width="20%">
+            <input type="text" name="new_pop">
+          </td>
+          <td width="60%">
+            <input type="submit" name="add_pop" value="add population">
+          </td>
+        </tr>
+      </table>
+    <{/if}>
+  <{/if}>
+</form>

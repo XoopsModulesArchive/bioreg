@@ -1,0 +1,303 @@
+<small>
+  <a href="index.php"><{$smarty.const._MI_BIOREG_LISTING}></a> |
+  <a href="bioreg-info.php"><{$smarty.const._MI_BIOREG_INFO}></a> |
+  <a href="bioreg-newitem.php"><{$smarty.const._MI_BIOREG_NEWITEM}></a>
+</small>
+
+<{if $delete eq 'y'}>
+<form>
+  <table>
+    <tr>
+      <td>
+        <b>
+          The following items will be deleted:
+        </b>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL1}></td>
+      <td width="15%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL2}></td>
+      <td width="30%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL3}></td>
+      <td width="5%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL4}></td>
+    </tr>
+    <{section name=ix loop=$bio_listings_by_user}>
+      <{section name=jx loop=$bio_pop2sel}>
+        <{if $bio_pop2sel[jx] eq $bio_listings_by_user[ix].listings_key}>
+          <input type="hidden" name="bio_pop2sel[]" value="<{$bio_listings_by_user[ix].listings_key}>">
+          <tr>
+            <td>
+              <i><{$bio_listings_by_user[ix].genus_name|escape}> <{$bio_listings_by_user[ix].species_name|escape}></i> <b><{$bio_listings_by_user[ix].pop_name|escape}></b>
+            </td>
+            <td>
+              <{$bio_listings_by_user[ix].listings_price}>
+            </td>
+            <td>
+              <{$bio_listings_by_user[ix].listings_comment}>
+            </td>
+            <td>
+              <{$bio_listings_by_user[ix].listings_type}>
+            </td>
+          </tr>
+        <{/if}>
+      <{/section}>
+    <{/section}>
+    <tr>
+      <td>
+        <input type="submit" name="deleteconfirmed" value="confirm deletion">
+        &nbsp; &nbsp; &nbsp;
+        <input type="submit" name="abortdelete" value="don't delete">
+      </td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+  <table>
+</form>
+<{elseif $send eq 'y'}>
+<form>
+  <table>
+    <tr>
+      <td>
+        <b>
+          The following items will be sent to the F&EL Maintainer:
+        </b>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL1}></td>
+      <td width="15%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL2}></td>
+      <td width="30%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL3}></td>
+      <td width="5%" class="heading"><center><b><{$smarty.const._MI_BIOREG_LABEL_COL4}></td>
+    </tr>
+    <{section name=ix loop=$bio_listings_by_user}>
+      <{section name=jx loop=$bio_pop2sel}>
+        <{if $bio_pop2sel[jx] eq $bio_listings_by_user[ix].listings_key}>
+          <input type="hidden" name="bio_pop2sel[]" value="<{$bio_listings_by_user[ix].listings_key}>">
+          <tr>
+            <td>
+              <i><{$bio_listings_by_user[ix].genus_name|escape}> <{$bio_listings_by_user[ix].species_name|escape}></i> <b><{$bio_listings_by_user[ix].pop_name|escape}></b>
+            </td>
+            <td>
+              <{$bio_listings_by_user[ix].listings_price}>
+            </td>
+            <td>
+              <{$bio_listings_by_user[ix].listings_comment}>
+            </td>
+            <td>
+              <{$bio_listings_by_user[ix].listings_type}>
+            </td>
+          </tr>
+        <{/if}>
+      <{/section}>
+    <{/section}>
+    <tr>
+      <td>
+        <input type="submit" name="sendconfirmed" value="send to F&EL">
+        &nbsp; &nbsp; &nbsp;
+        <input type="submit" name="abortsend" value="don't send">
+      </td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+  <table>
+</form>
+<{else}>
+<center>
+  <h2>
+    <a href="<{$REQUEST_URI}>"><{$smarty.const._MI_BIOREG_MANAGE_LISTING}></a>
+  </h2>
+  <h4>
+   <{$smarty.const._MI_BIOREG_DISCLAIM}>
+  </h4>
+  <b><{$smarty.const._MI_BIOREG_LABEL_COL4}>: </b><{$smarty.const._MI_BIOREG_TITLE2_COL4}><br>
+  <b><{$smarty.const._MI_BIOREG_LABEL_COL5}>: </b><{$smarty.const._MI_BIOREG_TITLE2_COL5}><br>
+  <b><{$smarty.const._MI_BIOREG_LABEL_COL6}>: </b><{$smarty.const._MI_BIOREG_TITLE2_COL6}><br>
+</center>
+<br>
+<form method="post" action="<{$REQUEST_URI}>">
+  <{if $numitems gt 0}>
+    <table class="normal">
+      <tr>
+        <td width="50%" class="heading"><center><b><a href="<{$REQUEST_URI}>" title="<{$smarty.const._MI_BIOREG_TITLE2_COL1}>"><{$smarty.const._MI_BIOREG_LABEL_COL1}></td>
+        <td width="15%" class="heading"><center><b><a href="<{$REQUEST_URI}>" title="<{$smarty.const._MI_BIOREG_TITLE2_COL2}>"><{$smarty.const._MI_BIOREG_LABEL_COL2}></a></td>
+        <td width="20%" class="heading"><center><b><a href="<{$REQUEST_URI}>" title="<{$smarty.const._MI_BIOREG_TITLE2_COL3}>"><{$smarty.const._MI_BIOREG_LABEL_COL3}></a></td>
+        <td width="5%" class="heading"><center><b><a href="<{$REQUEST_URI}>" title="<{$smarty.const._MI_BIOREG_TITLE2_COL4}>"><{$smarty.const._MI_BIOREG_LABEL_COL4}></a></td>
+        <td width="5%" class="heading"><center><b><a href="<{$REQUEST_URI}>" title="<{$smarty.const._MI_BIOREG_TITLE2_COL5}>"><{$smarty.const._MI_BIOREG_LABEL_COL5}></a></td>
+        <td width="5%" class="heading"><center><b><a href="<{$REQUEST_URI}>" title="<{$smarty.const._MI_BIOREG_TITLE2_COL6}>"><{$smarty.const._MI_BIOREG_LABEL_COL6}></a></td>
+        <td width="3%"class="heading"><center><b><a href="<{$REQUEST_URI}>" title="<{$smarty.const._MI_BIOREG_TITLE2_COL7}>"><{$smarty.const._MI_BIOREG_LABEL_COL7}></a></td>
+      </tr>
+      <{cycle values="odd,even" print=false}>
+      <{section name=ix loop=$bio_listings_by_user}>
+        <input type="hidden" name="listings_array[<{$bio_listings_by_user[ix].listings_key}>]">
+        <tr>
+          <{if $bio_listings_by_user[ix].pop_url eq ''}>
+            <td class="<{cycle advance=false}>">
+              <i><{$bio_listings_by_user[ix].genus_name|escape}> <{$bio_listings_by_user[ix].species_name|escape}></i> <b><{$bio_listings_by_user[ix].pop_name|escape}></b>
+            </td>
+          <{else}>
+            <td class="<{cycle advance=false}>">
+              <a class="link" href="<{$bio_listings_by_user[ix].pop_url}>"><i><{$bio_listings_by_user[ix].genus_name|escape}> <{$bio_listings_by_user[ix].species_name|escape}></i> <b><{$bio_listings_by_user[ix].pop_name|escape}></b></a>
+            </td>
+          <{/if}>
+          <td class="<{cycle advance=false}>">
+            <input type="text" size=8 name="price[<{$bio_listings_by_user[ix].listings_key}>]" value="<{$bio_listings_by_user[ix].listings_price}>"><br>
+          </td>
+          <td class="<{cycle advance=false}>">
+            <input type="text" size=12 name="comment[<{$bio_listings_by_user[ix].listings_key}>]" value="<{$bio_listings_by_user[ix].listings_comment}>"><br>
+          </td>
+          <td class="<{cycle advance=false}>">
+            <select name="type[<{$bio_listings_by_user[ix].listings_key}>]">
+              <{html_options output=$typedesc values=$typeid selected=$bio_listings_by_user[ix].listings_type}>
+            </select>
+          </td>
+          <td class="<{cycle advance=false}>">
+            <select name="status[<{$bio_listings_by_user[ix].listings_key}>]">
+              <{html_options output=$statusdesc values=$statusid selected=$bio_listings_by_user[ix].listings_status}>
+            </select>
+          </td>
+          <td class="<{cycle advance=false}>">
+            <select name="visible[<{$bio_listings_by_user[ix].listings_key}>]">
+              <{html_options output=$visibledesc values=$visibleid selected=$bio_listings_by_user[ix].listings_visible}>
+            </select>
+          </td>
+          <td class="<{cycle}>">
+                <input type="checkbox" name="bio_pop2sel[]" value="<{$bio_listings_by_user[ix].listings_key}>">
+          </td>
+        </tr>
+      <{/section}>
+      <tr>
+        <td colspan=2>
+          <input type="submit" name="update" value="update current listings" title="This will save all yout changes in all your listings with 1 click">
+        </td>
+        <td colspan=3 align="right">
+          Submit checked items to F&EL chairman&nbsp;
+        </td>
+        <td colspan=2 align="left">
+          <input type="submit" name="send" value="send" title="This will send a list of the items you checked to the F&EL maintainer">
+        </td>
+      </tr>
+      <tr>
+        <td colspan=2></td>
+        <td colspan=3 align="right">
+          Delete checked items&nbsp;
+        </td>
+        <td colspan=2 align="left">
+          <input type="submit" name="delete" value="delete" title="This will delete the items that you have checked">
+        </td>
+      </tr>
+    </table>
+    <br>
+  <{/if}>
+</form>
+<p><p>
+
+<h3>Add listings:</h3>
+<form method="post" action="<{$REQUEST_URI}>">
+  <table>
+    <input type="hidden" name="genus_name" value="<{$genus}>">
+    <tr>
+      <td width="15%">
+      </td>
+      <td width="20%">
+      </td>
+      <td width="65%" align="left">
+        <input type="checkbox" name="list_pops" title="checking this gives a complete list of all populations for all species (may be long)">
+        List all species/populations for this genus
+      </td>
+    </tr>
+    <tr>
+      <td width="15%" align="right">
+        Select Genus<br><i>(or item type)</i>&nbsp;
+      </td>
+      <td width="20%">
+        <select name="genus_name">
+          <{section name=genusname loop=$bio_genus}>
+            <option value="<{$bio_genus[genusname].genus_name}>"<{if $bio_genus[genusname].genus_name eq $genus}> selected<{/if}>>
+              <{$bio_genus[genusname].genus_name|escape}>
+            </option>
+          <{/section}>
+        </select>
+      </td>
+      <td width="65%" align="left">
+        <input type="submit" name="sel_genus" value="select">
+      </td>
+    </tr>
+  </table>
+</form>
+
+<{if $genus|count_characters gt 0}>
+  <form method="post" action="<{$REQUEST_URI}>">
+    <table>
+      <input type="hidden" name="genus_name" value="<{$genus}>">
+      <tr>
+        <td width="15%" align="right">
+          Select Species&nbsp;
+        </td>
+        <td width="20%">
+          <select name="species_name">
+            <{section name=speciesname loop=$bio_species_by_genus}>
+              <option value="<{$bio_species_by_genus[speciesname].species_name}>">
+                <{$bio_species_by_genus[speciesname].species_name|escape}>
+              </option>
+            <{/section}>
+          </select>
+        </td>
+        <td width="65%">
+          <input type="submit" name="sel_species" value="select">
+        </td>
+      </tr>
+    </table>
+  </form>
+<{/if}>
+
+<{if $list_pops eq 'on'}>
+  <form method="post" action="<{$REQUEST_URI}>">
+    <input type="hidden" name="genus_name" value="<{$genus}>">
+    <input type="hidden" name="species_name" value="<{$species}>">
+    <table class="normal">
+      <tr>
+        <td width="3%" class="heading">
+        </td>
+        <td width="97%" class="heading">
+          <i><b>Check all Species/Populations that you wish to add</b></i><br><br>
+        </td>
+      </tr>
+      <{cycle values="odd,even" print=false}>
+      <{section name=popname loop=$bio_pop_by_genus}>
+        <{if $bio_pop_by_genus[popname].status ne 'I'}>
+          <tr>
+            <td class="<{cycle advance=false}>">
+              <input type="checkbox" name="bio_pop2add[]" value="<{$bio_pop_by_genus[popname].pop_key}>">
+            </td>
+            <td class="<{cycle advance=true}>">
+              <i><{$bio_pop_by_genus[popname].genus_name}> <{$bio_pop_by_genus[popname].species_name}></i> <b><{$bio_pop_by_genus[popname].pop_name}></b>
+            </td>
+          </tr>
+        <{/if}>
+      <{/section}>
+      <tr>
+        <td>
+        </td>
+        <td>
+          <input type="submit" name="qeadd" value="add to your listings" title="This will add a listing record for each population that you have checked above">
+        </td>
+      </tr>
+      <{if $can_add_populations eq 'y' and $species|count_characters gt 0}>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <i>Please be careful adding new populations, make sure that they are really valid</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <input type="text" size=20 name="new_pop">
+            <input type="submit" name="add_pop" value="add new population">
+          </td>
+        </tr>
+      <{/if}>
+    </table>
+  </form>
+<{/if}>
+<a href="bioreg-newitem.php">To request addition of new genus, species, or population names, or other items </a>
+<{/if}>

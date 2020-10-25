@@ -1,0 +1,61 @@
+<small>
+  <a href="index.php"><{$smarty.const._MI_BIOREG_LISTING}></a> |
+  <a href="bioreg-manage_listings.php"><{$smarty.const._MI_BIOREG_MANAGE_LISTING}></a> |
+  <a href="bioreg-newitem.php"><{$smarty.const._MI_BIOREG_NEWITEM}></a>
+</small>
+
+<{* Display the appropriate heading *}>
+<center>
+  <h2>
+    <{if $pop_selected eq 'y'}>
+      Select the new species for <{$genus}> <{$species}> <{$pop}>
+    <{else}>
+      Select the new genus for <{$genus}> <{$species}>
+    <{/if}>
+  </h2>
+</center>
+
+<form method="get" action="<{$REQUEST_URI}>">
+  <table>
+    <input type="hidden" name="genus" value="<{$genus}>">
+    <input type="hidden" name="species" value="<{$species}>">
+    <{if $pop_selected eq 'y'}>
+      <input type="hidden" name="pop" value="<{$pop}>">
+      <tr>
+        <td width="20%" align="right">
+          Select new species
+        </td>
+        <td width="20%">
+          <select name="species_name">
+            <{section name=speciesname loop=$bio_species_by_genus}>
+              <option value="<{$bio_species_by_genus[speciesname].species_name}>"<{if $bio_species_by_genus[speciesname].species_name eq $species}> selected<{/if}>>
+                <{$bio_species_by_genus[speciesname].species_name|escape}>
+              </option>
+            <{/section}>
+          </select>
+        </td>
+        <td width="60%">
+          <input type="submit" name="sel_species" value="select species">
+        </td>
+      </tr>
+    <{else}>
+      <tr>
+        <td width="20%" align="right">
+          Select new genus<br><i>(or item type)</i>
+        </td>
+        <td width="20%">
+          <select name="genus_name">
+            <{section name=genusname loop=$bio_genus}>
+              <option value="<{$bio_genus[genusname].genus_name}>"<{if $bio_genus[genusname].genus_name eq $genus}> selected<{/if}>>
+                <{$bio_genus[genusname].genus_name|escape}>
+              </option>
+            <{/section}>
+          </select>
+        </td>
+        <td width="60%">
+          <input type="submit" name="sel_genus" value="select genus">
+        </td>
+      </tr>
+    <{/if}>
+  </table>
+</form>

@@ -1,0 +1,203 @@
+CHANGELOG
+
+2004-06-16 dheltzel
+	v0.0
+	initial creation
+
+2004-06-24 dheltzel
+	v0.1.004
+	removed unused files
+	fixed database connections
+
+2004-06-28 dheltzel
+	v0.1.011
+	removed more unused files
+	fixed remaining functionality
+	added text search of listings
+	updated admin pages
+
+2004-06-29 dheltzel
+	v0.2.000
+	major release with many bug fixes and interface improvements.
+
+2004-06-29 dheltzel
+	v0.2.001
+	seller link now works
+	search vars now persistent
+	admin pages save state when forms are submitted
+	cleaned up SQL file
+
+2004-06-30 dheltzel
+	v0.2.002
+	added seller info to seller listing page
+
+2004-07-01 dheltzel
+	v0.2.003
+	changed "Listing Filters" to "Search Filters"
+	changed "Apply filters" button to "Search"
+	added help line under "Search Filters"
+	added line in a smaller font saying "Check all species that you wish to list" to manage listing page
+	listings disclaimer "listings are subject to AKA Code of Ethics."
+	only show first line of comments
+	changed "register only" from blank to 'R'
+	added link to main page from manage listing page
+	made visiblilty codes work
+
+2004-07-01 dheltzel
+	v0.2.004
+	allowed editing of the "empty" population
+	put select boxes from parent pages on all admin menus
+	added check to prevent access to the manage listing page unless logged in
+	added docs directory with FAQ
+	removed the F&EL listingtype
+	added "non-fish" type listing
+	added buttons to manage listings page to export and send to F&EL (not functional yet)
+
+2004-07-03 dheltzel
+	v0.3.000
+	major release with database changes that require a remove/install of the module
+	added columns to table to track creation and last update.
+	added permission groups for adding populations and creating listings
+	added code to track insert/updates
+
+2004-07-06 dheltzel
+	v0.3.002
+	fixed problem in SQL code that broke 0.3.001
+
+2004-07-07 dheltzel
+	v0.3.003
+	changed "Name" to "Item Name"
+	added "Partial words OK - Not case sensitive" to listing page
+	changed "Unavailable" to "Not curr avail"
+	removed "export" button
+	switched order of submenu
+	improved format of send ot F&EL and delete buttons
+
+2004-07-09 dheltzel
+	v0.4.000
+	added status field to populations table
+	added uid field to listings table
+	added species selection to bio-manage (add listings)
+	added ability to add populations directly from the bio-manage page
+	improved admin menu
+	added listing and export functions to admin menu
+	added email address to send requests for new genus/species
+	add non-fish item examples
+
+2004-07-10 dheltzel
+	v0.4.001
+	add "are you sure" page to delete and send to F&EL actions
+	add functionality to manage listings page to send to F&EL
+
+2004-07-11 dheltzel
+	v0.4.002
+	changed permission system to use Xoops group permissions
+	merged bioreg-admin into bioreg-info
+	fixed insert/update queries (use queryF instead of query for DML)
+	completed export function on admin menu
+
+2004-07-12 dheltzel
+	v0.4.003
+	improve listing details
+	some code cleanups to reduce complexity
+	wording changes on manage listings page
+
+2004-07-15 dheltzel
+	v0.4.004
+	made seller email clickable
+	added list of populations and their status for user with the add species permission
+	populations with a status of I are not visible on the manage listings page or to anyone without the add species perm
+	reorganized the html in the manage listing page to make it easier to understand
+	population info page now lists all populations at once for a species
+	allow changing sort order on listings page (item, seller or newest)
+
+2004-07-17 dheltzel
+	v0.4.005
+	fixed listing link from population page
+	added body text to email link for sending nomenclature requests
+	lots of code cleanup
+
+2004-07-18 dheltzel
+	v0.4.006
+	small fixes
+
+2004-07-27 dheltzel
+	v0.9.000
+	bumped version number to indicate we are nearing a 1.0 release
+	added form page to request a new item
+	removed sample data from install sql file, moved to aka_items.php and aka_sample_listings.php
+	lots of small bug fixes
+	add ability to export/import listing records (useful for rebuilding the database or bulk loading/fixing with an editor)
+
+2004-07-28 dheltzel
+	v0.9.001
+	changed new item request form to use xoops form handlers
+
+2004-08-01 dheltzel
+	v0.9.002
+	added title tags for tool tips to the listings page
+	fixed pop info template so that the update buttons only appear if the user has the proper perms
+
+2004-08-11 dheltzel
+	v1.0.000
+	added additional navigation links to top of each page
+
+2004-08-12 dheltzel
+	v1.0.001
+	made submenu items only show if the user has enough perms to use them
+	extracted strings from listing page into language file constants
+	added 2 custom menu items (settable in preferences)
+
+2004-08-19 dheltzel
+	v1.0.002
+	changed type and status codes to use abbreviations
+	last update column not shows the date, not just an X
+
+2004-10-07 dheltzel
+	v1.0.003
+	fixed manage listings page - it was not showing the current status and availability
+
+2004-10-07 dheltzel
+	v1.0.004
+	cleanup of constant names
+	added new sub-menu item, "Add New Listing", so you don't have to scroll down a long list of items.
+	colorized new and invalid population names
+	added senders email address to the new population request form
+	added logic to force type to 'R' if the status is not "Available" and the type is not WTB
+
+2004-10-18 dheltzel
+	v1.0.005
+	added statistics block
+
+2004-10-19 dheltzel
+	v1.0.006
+	added group perm to control display of the seller's information (remove from anonymous to protect privacy)
+	added group perm to allow editing of anyone's listings (give this to admins only)	
+	improvements to the "send to F&EL" mailing procedure
+	removed all dependencies on listings_userid, now uses listings_uid - this makes it possible to change login names
+
+2004-10-20 dheltzel
+	v1.0.007
+	added comment system to species on the population info page.
+	internal code cleanup to pass an array of filter vars
+	added page navigation with a configurable number of display rows
+	fixed bug that prevented adding a new listing
+	fixed links on the admin/index page
+	fixed PHP errors on bioreg-info page
+	removed link on title of population info page
+	updated the F&EL email to include shipping,phone number, and the type of the item
+	added page to allow moving a species to a different genus, and a population to a diff species
+	added printer friendly listing page
+	fixed average in stats block to round to 2 decimal places
+	added page to manage new and invalid populations
+	added ability to delete populations
+
+2005-05-04 dheltzel
+	v1.0.008
+	fixed perms to force login on admin page
+
+2005-08-08 dheltzel
+	v1.1
+	start version 1.1
+	updates to work with Xoops 2.2 extended profiles
+

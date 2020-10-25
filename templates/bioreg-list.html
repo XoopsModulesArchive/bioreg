@@ -1,0 +1,38 @@
+<{if $for_export eq 'y'}>
+  <b>
+    Copy the following lines to a file with a .php extension. Edit as desired, then run from inside Xoops
+  </b>
+  <br>
+  <br>
+  &lt;?php
+  <br>
+  <br>
+  require dirname(__DIR__, 2) . '/mainfile.php';
+  <br>
+  include "include/bioreg_funcs.php";
+  <br>
+  <br>
+  <{section name=popname loop=$bio_pop_list}>
+    add_bio_pop('<{$bio_pop_list[popname].genus_name}>','<{$bio_pop_list[popname].species_name}>','<{$bio_pop_list[popname].pop_name}>');
+    <br>
+  <{/section}>
+
+  <br>
+  // Add listing records
+  <br>
+  <{section name=ix loop=$bio_list_arr}>
+	 add_bio_listing('<{$bio_list_arr[ix].listings_userid}>','<{$bio_list_arr[ix].genus_name}>','<{$bio_list_arr[ix].species_name}>','<{$bio_list_arr[ix].pop_name}>','<{$bio_list_arr[ix].listings_visible}>','<{$bio_list_arr[ix].listings_price}>','<{$bio_list_arr[ix].listings_type}>','<{$bio_list_arr[ix].listings_status}>','<{$bio_list_arr[ix].listings_comment}>','<{$bio_list_arr[ix].create_time}>');
+	 <br>
+  <{/section}>
+  <br>
+
+  <br>
+  ?&gt;
+<{else}>
+  <{section name=popname loop=$bio_pop_list}>
+    <{$bio_pop_list[popname].genus_name}>
+    <{$bio_pop_list[popname].species_name}>
+    <{$bio_pop_list[popname].pop_name}>
+    <br>
+  <{/section}>
+<{/if}>

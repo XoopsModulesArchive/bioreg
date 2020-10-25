@@ -1,0 +1,82 @@
+<small>
+  <a href="index.php"><{$smarty.const._MI_BIOREG_LISTING}></a> |
+  <a href="bioreg-manage_listings.php"><{$smarty.const._MI_BIOREG_MANAGE_LISTING}></a> |
+  <a href="bioreg-newitem.php"><{$smarty.const._MI_BIOREG_NEWITEM}></a>
+</small>
+
+<{* Display the appropriate heading *}>
+<center>
+  <h2>
+      Population Maintenance
+  </h2>
+</center>
+
+<{if $can_add_species eq 'y'}>
+<form method="post" action="<{$REQUEST_URI}>">
+  <table>
+    <tr>
+      <th width="55%">
+        Name
+      </th>
+      <th width="15%">
+        Common Name
+      </th>
+      <th width="15%">
+        URL
+      </th>
+      <th width="8%">
+        Status
+      </th>
+      <th width="8%">
+        Listings
+      </th>
+    </tr>
+    <{cycle values="odd,even" print=false}>
+    <{section name=popname loop=$bio_pop_by_genus}>
+      <input type="hidden" name="populations_array[<{$bio_pop_by_genus[popname].pop_key}>]">
+        <tr>
+          <td class="<{cycle advance=false}>">
+            <i><{$bio_pop_by_genus[popname].genus_name}> <{$bio_pop_by_genus[popname].species_name}></i>
+            <{if $bio_pop_by_genus[popname].pop_name|count_characters eq 0}>
+              (none specified)
+            <{/if}>
+            <input type="text" size=25 name="pop_name_arr[<{$bio_pop_by_genus[popname].pop_key}>]" value="<{$bio_pop_by_genus[popname].pop_name}>">
+          </td>
+          <td class="<{cycle advance=false}>">
+            <input type="text" size=20 name="common_name[<{$bio_pop_by_genus[popname].pop_key}>]" value="<{$bio_pop_by_genus[popname].common_name}>">
+          </td>
+            <td class="<{cycle advance=false}>">
+              <input type="text" size=20 name="pop_url[<{$bio_pop_by_genus[popname].pop_key}>]" value="<{$bio_pop_by_genus[popname].pop_url}>">
+            </td>
+            <td class="<{cycle advance=false}>">
+              <{if $bio_pop_by_genus[popname].pop_name|count_characters gt 0}>
+                <select name="status[<{$bio_pop_by_genus[popname].pop_key}>]">
+                  <{html_options output=$statusdesc values=$statusid selected=$bio_pop_by_genus[popname].status}>
+                </select>
+              <{else}>
+                  <{$smarty.const._MI_BIOREG_POP_STATUS_A}>
+              <{/if}>
+            </td>
+          <td class="<{cycle advance=true}>">
+            <{if $bio_pop_by_genus[popname].lcount gt 0}>
+              <a href="index.php?popkey=<{$bio_pop_by_genus[popname].pop_key}>&all_types=y">
+                Listings
+              </a>
+            <{else}>
+              <a href="bioreg-pop_maint.php?popkey=<{$bio_pop_by_genus[popname].pop_key}>&delete=y">
+                Delete
+              </a>
+            <{/if}>
+          </td>
+        </tr>
+    <{/section}>
+    <tr>
+      <td>
+        <input type="submit" name="upd_pop" value="update population info">
+      </td>
+    </tr>
+  </table>
+</form>
+<{else}>
+  Permission denied
+<{/if}>
